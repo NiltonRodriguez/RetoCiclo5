@@ -5,16 +5,14 @@
  */
 package com.niltonrodriguez.AltoTurmeque.repository.CRUD;
 
-import com.niltonrodriguez.AltoTurmeque.entity.User;
+import com.niltonrodriguez.AltoTurmeque.entity.Clothe;
 import java.util.Optional;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
  * @author niltonrodriguez
  */
-public interface UserCrudRepository extends MongoRepository<User, Integer>{
-    Optional<User> findByEmail(String email);
-    Optional<User> findByEmailAndPassword(String email, String password);
+public interface ClotheCrudRepository extends MongoRepository<Clothe, String>{
+    
 }
