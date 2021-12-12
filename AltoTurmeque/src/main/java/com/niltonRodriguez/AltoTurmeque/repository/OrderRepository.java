@@ -57,16 +57,12 @@ public class OrderRepository {
         return crudRepository.findByZone(zone);
     }
     
-    public List<Order> ordersSalesManByDate(String dateStr, int id){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public List<Order> ordersSalesManById(Integer id){
         
         Query query = new Query();
-        Criteria dateCriteria = Criteria.where("registerDay")
-                .gte(LocalDate.parse(dateStr, formatter).minusDays(1).atStartOfDay())
-                .lt(LocalDate.parse(dateStr, formatter).plusDays(2).atStartOfDay())
-                .and("salesMan.id").is(id);
+        Criteria idCriteria = Criteria.where("salesMan.id").is(id);
         
-        query.addCriteria(dateCriteria);
+        query.addCriteria(idCriteria);
         List<Order> orders = mongoTemplate.find(query, Order.class);
         
         return orders;
@@ -83,4 +79,20 @@ public class OrderRepository {
         
         return orders;
     }
+    
+    public List<Order> ordersSalesManByDate(String dateStr, int id){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        
+        Query query = new Query();
+        Criteria dateCriteria = Criteria.where("registerDay")
+                .gte(LocalDate.parse(dateStr, formatter).minusDays(1).atStartOfDay())
+                .lt(LocalDate.parse(dateStr, formatter).plusDays(1).atStartOfDay())
+                .and("salesMan.id").is(id);
+        
+        query.addCriteria(dateCriteria);
+        List<Order> orders = mongoTemplate.find(query, Order.class);
+        
+        return orders;
+    }
+
 }

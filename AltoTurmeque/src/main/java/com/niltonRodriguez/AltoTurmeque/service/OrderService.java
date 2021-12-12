@@ -82,11 +82,17 @@ public class OrderService {
         return repository.findByZone(zone);
     }
     
-    public List<Order> ordersSalesManByDate(String dateStr, int id){
+    public List<Order> ordersSalesManById(Integer id){
+        return repository.ordersSalesManById(id);
+    }
+    
+    public List<Order> ordersSalesManByState(String state, Integer id){
+        return repository.ordersSalesManByState(state, id);
+    }
+    
+    public List<Order> ordersSalesManByDate(String dateStr, Integer id){
         return repository.ordersSalesManByDate(dateStr, id);
     }
     
-    public List<Order> ordersSalesManByState(String state, int id){
-        return repository.ordersSalesManByState(state, id);
-    }
+    
 }
