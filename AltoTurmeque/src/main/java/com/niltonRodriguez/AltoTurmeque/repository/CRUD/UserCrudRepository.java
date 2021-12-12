@@ -6,6 +6,8 @@
 package com.niltonrodriguez.AltoTurmeque.repository.CRUD;
 
 import com.niltonrodriguez.AltoTurmeque.entity.User;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -17,4 +19,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface UserCrudRepository extends MongoRepository<User, Integer>{
     Optional<User> findByEmail(String email);
     Optional<User> findByEmailAndPassword(String email, String password);
+    //List<User> findByBirthtDay(Date birthtDay);
+    //List<User> findByMonthBirthtDay(String monthBirthtDay);
+    //List<User> findOneByOrderByIdDesc();
+    // Select the last ID
+    Optional<User> findTopByOrderByIdDesc();
 }

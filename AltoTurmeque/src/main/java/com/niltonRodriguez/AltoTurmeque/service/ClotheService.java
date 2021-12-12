@@ -33,12 +33,7 @@ public class ClotheService {
         if(clothe.getReference() == null){
             return clothe;
         } else {
-            Optional<Clothe> check = repository.getClothe(clothe.getReference());
-            if(check.isEmpty()){    
-                return repository.create(clothe);
-            } else {
-                return clothe;
-            }
+            return repository.create(clothe);
         }
     }
     
@@ -68,9 +63,9 @@ public class ClotheService {
         }
     }
     
-    public boolean delete(String id){
-        Boolean aBoolean= getClothe(id).map(user -> {
-            repository.delete(id);
+    public boolean delete(String reference){
+        Boolean aBoolean= getClothe(reference).map(clothe -> {
+            repository.delete(clothe);
             return true;
         }).orElse(aBoolean=false);
         

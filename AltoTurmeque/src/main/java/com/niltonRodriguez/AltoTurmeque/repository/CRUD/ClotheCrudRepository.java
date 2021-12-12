@@ -6,7 +6,6 @@
 package com.niltonrodriguez.AltoTurmeque.repository.CRUD;
 
 import com.niltonrodriguez.AltoTurmeque.entity.Clothe;
-import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

@@ -37,7 +37,7 @@ public class ClotheRepository {
         crudRepository.save(clothe);
     }
     
-    public void delete(String reference){
-        crudRepository.deleteById(reference);
+    public void delete(Clothe clothe){
+        crudRepository.delete(clothe);
     }
 }

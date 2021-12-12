@@ -44,19 +44,30 @@ public class UserService {
     }
     
     public User create(User user){
+        
+        // Get last ID from the collection.
+        Optional<User> maxUserId = repository.lastUserId();
+        // Check if the parameter ID is null.
         if (user.getId() == null){
-                return user;
-        }else{
-            Optional<User> check = repository.getUser(user.getId());
-            if (check.isEmpty()){
-                if(existEmail(user.getEmail()) == false){
-                    return repository.create(user);
-                } else {
-                    return user;
-                }
+            // If there's no max ID, asign it to 1.
+            if (maxUserId.isEmpty()){
+                user.setId(1);
+            }
+            else{
+                // If there is a max ID, asign the max + 1.
+                user.setId(maxUserId.get().getId() + 1);
+            }
+        }
+        
+        Optional<User> check = repository.getUser(user.getId());
+        if (check.isEmpty()){
+            if(existEmail(user.getEmail()) == false){
+                return repository.create(user);
             } else {
                 return user;
             }
+        } else {
+            return user;
         }
     }
 
@@ -101,7 +112,7 @@ public class UserService {
     
     public boolean delete(int id){
         Boolean aBoolean= getUser(id).map(user -> {
-            repository.delete(id);
+            repository.delete(user);
             return true;
         }).orElse(aBoolean=false);
         

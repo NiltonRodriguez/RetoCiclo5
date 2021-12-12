@@ -22,11 +22,23 @@ public class UserRepository {
     private UserCrudRepository crudRepository;
     
     public List<User> getAll(){
-        return crudRepository.findAll();
+        return (List<User>) crudRepository.findAll();
     }
     
     public Optional<User> getUser(int id){
         return crudRepository.findById(id);
+    }
+    
+    public User create(User user){
+        return crudRepository.save(user);
+    }
+    
+    public void update(User user){
+        crudRepository.save(user);
+    }
+    
+    public void delete(User user){
+        crudRepository.delete(user);
     }
     
     public boolean existEmail(String email){
@@ -38,15 +50,7 @@ public class UserRepository {
         return crudRepository.findByEmailAndPassword(email, password);
     }
     
-    public User create(User user){
-        return crudRepository.save(user);
-    }
-    
-    public void update(User user){
-        crudRepository.save(user);
-    }
-    
-    public void delete(int id){
-        crudRepository.deleteById(id);
+    public Optional<User> lastUserId(){
+        return crudRepository.findTopByOrderByIdDesc();
     }
 }
