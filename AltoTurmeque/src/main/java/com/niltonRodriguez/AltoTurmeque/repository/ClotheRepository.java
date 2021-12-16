@@ -10,6 +10,9 @@ import com.niltonrodriguez.AltoTurmeque.repository.CRUD.ClotheCrudRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,6 +23,9 @@ import org.springframework.stereotype.Repository;
 public class ClotheRepository {
     @Autowired
     private ClotheCrudRepository crudRepository;
+    
+    @Autowired
+    private MongoTemplate mongoTemplate;
     
     public List<Clothe> getAll(){
         return crudRepository.findAll();
@@ -39,5 +45,19 @@ public class ClotheRepository {
     
     public void delete(Clothe clothe){
         crudRepository.delete(clothe);
+    }
+    
+    public List<Clothe> findByPrice(double price){
+        return crudRepository.findByPrice(price);
+    }
+    
+    public List<Clothe> findByDescriptionLike(String keyword){
+        Query query = new Query();
+        Criteria keywordCriteria = Criteria.where("description").regex(".*" + keyword + ".*", "i");
+        
+        query.addCriteria(keywordCriteria);
+        List<Clothe> clothes = mongoTemplate.find(query, Clothe.class);
+        
+        return clothes;
     }
 }

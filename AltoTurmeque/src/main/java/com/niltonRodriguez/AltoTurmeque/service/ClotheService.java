@@ -71,4 +71,12 @@ public class ClotheService {
         
         return aBoolean;
     }
+    
+    public List<Clothe> findByPrice(double price){
+        return repository.findByPrice(price);
+    }
+    
+    public List<Clothe> findByDescriptionLike(String keyword){
+        return repository.findByDescriptionLike(keyword);
+    }
 }

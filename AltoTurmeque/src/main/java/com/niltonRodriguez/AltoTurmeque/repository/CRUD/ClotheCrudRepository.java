@@ -6,6 +6,7 @@
 package com.niltonrodriguez.AltoTurmeque.repository.CRUD;
 
 import com.niltonrodriguez.AltoTurmeque.entity.Clothe;
+import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
@@ -14,4 +15,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface ClotheCrudRepository extends MongoRepository<Clothe, String>{
     
+    public List<Clothe> findByPrice(double price);
 }

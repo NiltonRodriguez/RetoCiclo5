@@ -118,4 +118,8 @@ public class UserService {
         
         return aBoolean;
     }
+    
+    public List<User> findByMonthBirthtDay(String monthBirthtDay){
+        return repository.findByMonthBirthtDay(monthBirthtDay);
+    }
 }

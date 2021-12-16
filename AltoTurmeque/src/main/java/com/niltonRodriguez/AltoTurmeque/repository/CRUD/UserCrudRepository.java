@@ -20,7 +20,7 @@ public interface UserCrudRepository extends MongoRepository<User, Integer>{
     Optional<User> findByEmail(String email);
     Optional<User> findByEmailAndPassword(String email, String password);
     //List<User> findByBirthtDay(Date birthtDay);
-    //List<User> findByMonthBirthtDay(String monthBirthtDay);
+    List<User> findByMonthBirthtDay(String monthBirthtDay);
     //List<User> findOneByOrderByIdDesc();
     // Select the last ID
     Optional<User> findTopByOrderByIdDesc();

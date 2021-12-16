@@ -58,4 +58,14 @@ public class ClotheController {
     public boolean delete(@PathVariable("reference") String id){
         return service.delete(id);
     }
+    
+    @GetMapping("/price/{price}")
+    public List<Clothe> findByPrice(@PathVariable("price") double price){
+        return service.findByPrice(price);
+    }
+    
+    @GetMapping("/description/{keyword}")
+    public List<Clothe> findByDescriptionLike(@PathVariable("keyword")String keyword){
+        return service.findByDescriptionLike(keyword);
+    }
 }
